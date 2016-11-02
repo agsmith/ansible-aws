@@ -22,59 +22,12 @@ task_type: pcap
 analysis_filename_suffix: time-analysis.txt
 #analysis_filename_suffix: packet-loss-analysis.txt
 
-## Name of directory in the root project directory that will store the results files
-results_dir: results
-
-## If set to true, playbook will download the Stream-Observer docker image
-## located at the {{docker_image_url}} location
-download_from_bamboo: false
-
-# If true, log file will be pulled for each run of each role and copied back to the host machine
-# for analysis
-gather_logs: false
-
-## This is the URL where the latest Stream-Observer 3.0.0 SNAPSHOT build is located in Bamboo
-## This would need to be updated accordingly if other releases need to be performance tested
-docker_image_url: https://acropolis/bamboo/artifact/OBSERVERSTREAM-APPRB30/JOB1/build-latestSuccessful/Collected-Artifacts/streamObserver_3.0.0-SNAPSHOT_0/ccadllc_stream-observer_3.0.0-SNAPSHOT.tar
-
-## This is the filename where the latest Stream-Observer 3.0.0 SNAPSHOT docker image is located
-#  This would need to be updated accordingly if other releases need to be performance tested
-#  This file should reside in the root level directory for this project
-## or <root>/roles/provisioner/files
-docker_image_filename: ccadllc_stream-observer_3.0.0-SNAPSHOT.tar
-
-## The name of the S3 bucket that contains the app.conf and pcap files for the various roles
-## https://console.aws.amazon.com/s3/home?region=us-west-2&bucket=so-pcap&prefix=
-s3_bucket_name: so-pcap
-
-## The Key Pair name for the AWS user running the test.  Find a suitable one here:
-## https://us-west-2.console.aws.amazon.com/ec2/v2/home?region=us-west-2#KeyPairs:sort=keyName
-key_name: bamboo-key
 
 ## Region associated with the AWS account
-region_name: us-west-2
+region_name:
 
 ## Security Group ID
-group_id: sg-2d445248
+group_id:
 
 ## Image Id for the Amazon Machine Image for CentOS 7 image
 ami_image_id: ami-c7d092f7
-
-## Script name of the parser that will collect runtime data from log files
-parser_script: parser.sh
-
-## Script name of the parser that will collect runtime data from log files for PCAP sources
-pcap_parser_script: pcap_parser.sh
-
-## Script name of the parser that will collect runtime data from log files for network sources
-network_parser_script: network_parser.sh
-
-## Name of the script that will run the docker image and perform various housekeeping tasks for PCAP sources
-pcap_docker_script: runPcapDocker.sh
-docker_script: runDocker.sh
-
-## Name of the script that will run the docker image and perform various housekeeping tasks for network sources
-network_docker_script: runNetworkDocker.sh
-
-## Time in seconds, to ignore packet loss to account for network instability at startup
-ignore_dropped_packet_period: 30
