@@ -1,4 +1,0 @@
-# Comment out the last line in this file and
-# Uncomment the line below and set runs_per_instance accordingly to override common runs_per_instance value
-#- include: ../../../executor/tasks/main.yml runs_per_instance=1
-- include: ../../../executor/tasks/main.yml
