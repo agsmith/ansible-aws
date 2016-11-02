@@ -1,8 +1,0 @@
-# CCAD development root directory
-ccad_home: "{{ lookup('env', 'CCAD_HOME') }}"
-
-# Stream Observer project directory where dockerization will occur
-so_project_dir: "{{ccad_home}}/observer/stream/app"
-
-# Name of Stream Observer docker image tarball
-so_tarball: "ccadllc_stream-observer_3.0.0-SNAPSHOT.tar"

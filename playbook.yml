@@ -28,32 +28,6 @@
   roles:
     - provisioner
 
-- hosts: ec2hosts
-  name: Run stream observer docker container(s)
-  remote_user: centos
-  gather_facts: False
-  sudo: yes
-  roles:
-    - profiles/dta-400k-10m-nt
-    - profiles/dta-800k-10m-nt
-    - profiles/dta-2000k-10m-nt
-    - profiles/dcii-500k-10m-nt
-    - profiles/dcii-750k-10m-nt
-    - profiles/dcii-1000k-10m-nt
-    - profiles/dcii-1500k-10m-nt
-    - profiles/dta-2000k-10m-5s-nt
-    - profiles/dta-2000k-10m-10s-nt
-    - profiles/dcii-1000k-10m-15s-nt
-    - profiles/dcii-1000k-10m-20s-nt
-
-- hosts: ec2hosts
-  name: Summate runtime data into a single summary-time-analysis.txt file
-  remote_user: centos
-  gather_facts: False
-  sudo: yes
-  roles:
-    - summator
-
 - hosts: localhost
   name: Terminate instances
   connection: local

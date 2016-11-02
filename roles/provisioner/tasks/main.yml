@@ -23,24 +23,4 @@
         command: chcon -Rt svirt_sandbox_file_t /var/opt/
         ignore_errors: yes
 
-      - name: Copy Stream Observer docker image and support scripts to instance
-        copy:
-          src="{{item}}"
-          dest="/home/centos/{{item}}"
-          owner=centos
-          group=centos
-          mode=0755
-        ignore_errors: yes
-        with_items:
-          - "{{docker_image_filename}}"
-          - "{{parser_script}}"
-          - "{{pcap_parser_script}}"
-          - "{{network_parser_script}}"
-          - "{{docker_script}}"
-          - "{{pcap_docker_script}}"
-          - "{{network_docker_script}}"
 
-      - name: "Load Docker Stream Observer image"
-        command: "docker load -i /home/centos/{{docker_image_filename}}"
-        sudo: yes
-        ignore_errors: yes
