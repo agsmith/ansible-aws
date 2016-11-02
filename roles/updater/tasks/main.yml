@@ -1,0 +1,41 @@
+- name: yum update
+  remote_user: centos
+  sudo: yes
+  yum: name=* state=latest
+  ignore_errors: yes
+
+- name: yum update
+  yum: name={{item}} state=latest
+  ignore_errors: yes
+  with_items:
+    - docker
+    - wget
+  sudo: yes
+
+- name: Copy docker config file to instance
+  copy:
+    src="docker"
+    dest="/etc/sysconfig/docker"
+    owner=root
+    group=root
+    mode=0644
+  ignore_errors: yes
+  sudo: yes
+
+- name: Set the Docker daemon to start on boot
+  service: name=docker enabled=yes
+  sudo: yes
+  ignore_errors: yes
+
+- name: restart machine
+  shell: sleep 2 && shutdown -r now "Ansible updates triggered"
+  async: 1
+  poll: 0
+  sudo: true
+  ignore_errors: true
+
+# - name: restart machine
+#   command: shutdown -r +1 "Ansible updates triggered"
+#   async: 0
+#   poll: 0
+#   ignore_errors: yes

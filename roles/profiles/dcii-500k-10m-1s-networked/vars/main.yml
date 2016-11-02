@@ -1,0 +1,5 @@
+task_name: dcii-500k-10m-1s-networked
+app_conf_filename: DCII_500K_10m_nt.conf
+netproducer_app_conf_filename: DCII_500K_10m_netproducer.conf
+netconsumer_app_conf_filename: DCII_1s_netconsumer.conf
+pcap_filename: DCII_500K_10m.pcap

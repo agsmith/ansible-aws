@@ -1,0 +1,3 @@
+task_name: dcii-750k-10m-nt
+app_conf_filename: DCII_750K_10m_nt.conf
+pcap_filename: DCII_750K_10m.pcap

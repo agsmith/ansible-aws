@@ -1,0 +1,5 @@
+task_name: dta-2000k-10m-5s-networked
+app_conf_filename: DTA_2000K_10m_nt.conf
+netproducer_app_conf_filename: DTA_2000K_10m_netproducer.conf
+netconsumer_app_conf_filename: DTA_5s_netconsumer.conf
+pcap_filename: DTA_2000K_10m.pcap

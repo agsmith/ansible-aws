@@ -1,0 +1,6 @@
+# /etc/sysconfig/docker
+
+# Modify these options if you want to change the way the docker daemon runs
+OPTIONS='-s overlay'
+
+DOCKER_CERT_PATH=/etc/docker

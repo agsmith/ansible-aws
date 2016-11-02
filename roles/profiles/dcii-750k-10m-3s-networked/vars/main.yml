@@ -1,0 +1,5 @@
+task_name: dcii-750k-10m-3s-networked
+app_conf_filename: DCII_750K_10m_nt.conf
+netproducer_app_conf_filename: DCII_750K_10m_netproducer.conf
+netconsumer_app_conf_filename: DCII_3s_netconsumer.conf
+pcap_filename: DCII_750K_10m.pcap

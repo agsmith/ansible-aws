@@ -1,0 +1,3 @@
+task_name: dta-800k-10m
+app_conf_filename: DTA_800K_10m.conf
+pcap_filename: DTA_800K_10m.pcap

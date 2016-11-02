@@ -1,0 +1,39 @@
+
+    - name: Launch a set of instances
+      ec2:
+         key_name: "{{key_name}}"
+         region: "{{region_name}}"
+         group_id: "{{group_id}}"
+         instance_type: "{{instance_type}}"
+         image: "{{ami_image_id}}"
+         wait: true
+         exact_count: "{{instance_count}}"
+         count_tag:
+            Name: "Observers"
+         instance_tags:
+            Name: "Observer Performance Test Suite Instance"
+      register: ec2
+
+    - name: Add all instance public IPs to host group
+      add_host: hostname={{item.public_ip}} groups=ec2hosts
+      with_items: ec2.instances
+
+    - name: Ensure instances initialize
+      wait_for:
+        host={{item.public_ip}}
+        port=22
+        delay=75
+        timeout=300
+      ignore_errors: yes
+      with_items: ec2.instances
+
+    - name: Download docker image from Bamboo
+      uri:
+        url: "{{docker_image_url}}"
+        dest: "./{{docker_image_filename}}"
+        method: GET
+        force_basic_auth: yes
+        user: "{{acropolis_user}}"
+        password: "{{acropolis_pass}}"
+      ignore_errors: yes
+      when: download_from_bamboo

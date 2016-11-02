@@ -1,0 +1,31 @@
+
+      - name: "Copy conf and pcap files to instance"
+        command: "wget {{item}}"
+        ignore_errors: yes
+        with_items:
+          - "https://s3-{{region_name}}.amazonaws.com/{{s3_bucket_name}}/conf/{{app_conf_filename}} -O /var/opt/observer/conf/app.conf"
+          - "https://s3-{{region_name}}.amazonaws.com/{{s3_bucket_name}}/pcap/{{pcap_filename}} -P /var/opt/observer/conf/"
+        when:
+          task_type == "pcap"
+
+      - name: "Copy conf and pcap files to instance"
+        command: "wget {{item}}"
+        ignore_errors: yes
+        with_items:
+          - "https://s3-{{region_name}}.amazonaws.com/{{s3_bucket_name}}/conf/{{netproducer_app_conf_filename}} -O /var/opt/observer-netproducer/conf/app.conf"
+          - "https://s3-{{region_name}}.amazonaws.com/{{s3_bucket_name}}/pcap/{{pcap_filename}} -P /var/opt/observer-netproducer/conf/"
+          - "https://s3-{{region_name}}.amazonaws.com/{{s3_bucket_name}}/conf/{{netconsumer_app_conf_filename}} -O /var/opt/observer/conf/app.conf"
+        when:
+          task_type == "network"
+
+      - name: "Run Docker container(s) and collect runtime data"
+        command: "/home/centos/runDocker.sh {{runs_per_instance}} {{task_name}} {{task_type}} {{gather_logs}} {{ignore_dropped_packet_period}}"
+        sudo: yes
+        ignore_errors: yes
+
+      - name: "Fetch analysis file from instances"
+        fetch: "src={{item}} dest=./{{results_dir}}"
+        ignore_errors: yes
+        with_items:
+          - "/home/centos/{{task_name}}-{{analysis_filename_suffix}}"
+          - "/home/centos/{{task_name}}.tar"

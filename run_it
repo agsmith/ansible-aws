@@ -1,0 +1,22 @@
+#!/bin/bash
+
+#Ansible Playbook to be run
+# NOTE: ONLY TO BE USED WITH NON-THROTTLED ROLES
+PLAYBOOK=playbook.yml
+
+# Set AWS Access Keys
+export AWS_ACCESS_KEY_ID=
+export AWS_SECRET_ACCESS_KEY=
+export ANSIBLE_HOST_KEY_CHECKING=false
+
+# Run the Ansible Playbook and gather the return code
+ansible-playbook -u bamboo $PLAYBOOK
+exitcode=$?
+
+if [ "$exitcode" = "0" ]; then
+  echo "Run successful!"
+  exit 0
+else
+  echo "Run failed!  Exiting with error code" $exitcode 1>&2
+  exit 1
+fi

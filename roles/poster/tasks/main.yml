@@ -1,0 +1,11 @@
+
+      - name: "Post results to Confluence wiki"
+        uri:
+          url: https://acropolis/confluence/rest/api/content/170823150
+          method: POST
+          user: asmith
+          password:
+          body: "{{lookup('file', 'result.json')}}"
+          force_basic_auth: yes
+          status_code: 201
+          body_format: json
